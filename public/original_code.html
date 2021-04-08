@@ -1,0 +1,63 @@
+<style>
+  body {
+    text-align: center;
+  }
+</style>
+<script type="text/javascript">
+  /*
+    window.context.nft_json contains the NFT json
+    window.context.properties contains the configured
+    properties (or default values)
+
+    Consider uploading any assets needed (image, music, video, ...)
+    to IPFS before referencing it in your code
+    (e.g using https://globalupload.io/)
+  */
+
+  // get data from nft_json attributes
+  // you can edit those attributes via the configuraiton
+  // icon up right
+
+  function setup() {
+    createCanvas(800, 800);
+  }
+
+  let y_start = 100;
+  let x_start = 100;
+  let x_end = 700;
+  let spacing = 8;
+
+  let spacing1 = 13.4;
+  let spacing2 = 4;
+
+  function draw() {
+    background(228, 216, 180);
+    stroke(39, 35, 36);
+
+    let y1 = y_start;
+    let y = y_start;
+    let noisevalue = sin(mouseX / 1000) + cos(mouseY / 1000);
+    let offset = 0.01;
+    while (y1 <= 700) {
+      noFill();
+      beginShape();
+
+      vertex(x_start, y1);
+
+      vertex(x_start + noise(noisevalue) * 300 + offset * 10, y);
+
+      //vertex(x_start+(sin(noisevalue)*300)+offset*10,y);
+
+      vertex(x_end, y1);
+
+      endShape();
+      if (y1 < 350) {
+        y += spacing1;
+      } else {
+        y += spacing2;
+      }
+      noisevalue += offset;
+      y1 += spacing;
+    }
+  }
+</script>
